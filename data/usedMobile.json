@@ -1,0 +1,164 @@
+[
+    {
+      "category_id": 1,
+      "name": "Nokia 110",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "03-08-22",
+      "information": "Many smartphone-savvy consumers might argue that the joy of purchasing a second hand phone is nothing compared to the excitement of unwrapping a brand new",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/n3NWBNF/1.jpg"
+    },
+    {
+      "category_id": 1,
+      "name": "Nokia 115",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "04-07-22",
+      "information": "mobile device that packs in the latest technology & features and looks unbelievably irresistible with its scratch free and gleaming body smartly encased in a stylish box!",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/8Yq1qM0/2.jpg"
+    },
+    {
+      "category_id": 1,
+      "name": "Nokia 221",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "05-12-21",
+      "information": "However, buying a new phone may not be a viable option every time, more so if you are a self-proclaimed gadget freak who is always on the lookout for the latest models",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/KLjZJZ1/3.jpg"
+    },
+    {
+      "category_id": 2,
+      "name": "Redmi Note",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "05-06-22",
+      "information": "Indeed, there are times when buying a second hand mobile or a pre-owned phone is far more economical than embracing a new one, particularly",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/cyBp4xg/1.jpg"
+    },
+    {
+      "category_id": 2,
+      "name": "Redmi Y3",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "02-02-22",
+      "information": " when you do not intend to splurge on high-end mobile phones. This could be either due to the fact that you are cash-strapped or because you realise that it is only",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/BNqZRTx/2.jpg"
+    },
+    {
+      "category_id": 2,
+      "name": "Redmi A30",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "15-05-22",
+      "information": "You should also know when it is time for an upgrade to a new smartphone. Whatever be your reasons to opt for a used smartphone, you must remember",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/r29vGGJ/3.jpg"
+    },
+    {
+      "category_id": 3,
+      "name": "Samsung A03",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "01-09-22",
+      "information": "that purchasing a used or second hand device can be a tricky affair, what with the market flooded with plenty of faulty and fake cell phones.",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/xzVQ0qK/1.jpg"
+    },
+    {
+      "category_id": 3,
+      "name": "Samsung A40",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "27-11-21",
+      "information": "Considering that second hand mobile phones can also have their fair share of wear and tear and often do not boast any warranty cover, due diligence of",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/3BXwMmV/2.jpg"
+    },
+    {
+      "category_id": 3,
+      "name": "Samsung M20",
+      "location": "Balagonj",
+      "originalPrice": 1600,
+      "resalePrice": 900,
+      "yearsOfUsed": 2,
+      "publishDate": "29-12-21",
+      "information": "the used handsets becomes non-negotiable if you do not wish to bring home a device that’s nothing but a rip-off.",
+      "author": [
+        {
+          "authorName": "Nurul Amin",
+          "authorImg": "",
+          "review": "5 Start"
+        }
+      ],
+      "mobileImg": "https://i.ibb.co/0Jxct1h/3.jpg"
+    }
+  ]
