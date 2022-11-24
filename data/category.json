@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "name": "Nokia Mobile",
+      "totalMobile": 3,
+      "mobileImg": "https://i.ibb.co/MPp1Bf2/nokia.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Samsung Mobile",
+      "totalMobile": 3,
+      "mobileImg": "https://i.ibb.co/8zcnZJV/redmi.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Redmi Mobile",
+      "totalMobile": 3,
+      "mobileImg": "https://i.ibb.co/0ynT4Cy/samsung.jpg"
+    }
+  ]
