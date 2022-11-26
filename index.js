@@ -20,9 +20,10 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
-    try{
+    try {
         const usedMobileCollection = client.db('usedMobileResaler').collection('usedMobiles');
         const categoryCollection = client.db('usedMobileResaler').collection('mobileCategory');
+        const bookingsCollection = client.db('usedMobileResaler').collection('bookings');
 
 
         // category 
@@ -33,39 +34,57 @@ async function run() {
         });
 
 
+        // bookings collection 
+        app.get('/bookings', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            const bookings = await bookingsCollection.find(query).toArray();
+            res.send(bookings);
+        })
 
+
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            console.log(booking);
+            const result = await bookingsCollection.insertOne(booking);
+            res.send(result);
+        })
+
+
+
+      
 
 
 
         // all mobiles 
         app.get('/allItems', async (req, res) => {
-            const query = {};
-            const allItems = await usedMobileCollection.find(query).toArray();
-            res.send(allItems);
+            const query = { };
+                                    const allItems = await usedMobileCollection.find(query).toArray();
+                                    res.send(allItems);
         })
 
         app.get('/showAllMobile/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { resalePrice: ObjectId(id) };
-            const allMobiles = await usedMobileCollection.find(query).toArray();
-            res.send(allMobiles);
+                                    const query = {resalePrice: ObjectId(id) };
+                                    const allMobiles = await usedMobileCollection.find(query).toArray();
+                                    res.send(allMobiles);
         });
 
 
         app.get('/category/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: ObjectId(id)};
-            const mobileCategory = await usedMobileCollection.find( query ).toArray();
-            res.send(mobileCategory);
+                                    const query = {_id: ObjectId(id)};
+                                    const mobileCategory = await usedMobileCollection.find( query ).toArray();
+                                    res.send(mobileCategory);
         });
 
         
 
     }
 
-    finally{
+                                    finally{
 
-    }
+                                    }
 };
 run().catch(err => console.error(err));
 
@@ -76,10 +95,10 @@ run().catch(err => console.error(err));
 
 // server testing
 app.get('/', (req, res) => {
-    res.send('server is running now');
+                                        res.send('server is running now');
 });
 
 
 app.listen(port, () => {
-    console.log(`server is running now on port ${port}`)
-})
+                                        console.log(`server is running now on port ${port}`)
+                                    })
