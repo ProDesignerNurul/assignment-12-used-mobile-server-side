@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 require('dotenv').config();
@@ -24,6 +25,7 @@ async function run() {
         const usedMobileCollection = client.db('usedMobileResaler').collection('usedMobiles');
         const categoryCollection = client.db('usedMobileResaler').collection('mobileCategory');
         const bookingsCollection = client.db('usedMobileResaler').collection('bookings');
+        const usersCollection = client.db('usedMobileResaler').collection('users');
 
 
         // category 
@@ -77,6 +79,27 @@ async function run() {
             const mobileCategory = await usedMobileCollection.find(query).toArray();
             res.send(mobileCategory);
         });
+
+
+
+        // users 
+        app.get('/jwt', async (req, res) => {
+            const email = req.query.email;
+            const query = {email: email};
+            const user = await usersCollection.findOne(query);
+            if(user) {
+                const token = jwt.sign({email}, process.env.ACCESS_TOKEN, {expiresIn: '1h'})
+                return res.send({accessToken: 'token'})
+            }
+            res.status(403).send({accessToken: ''});
+        })
+
+
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);
+            res.send(result);
+        })
 
 
 
