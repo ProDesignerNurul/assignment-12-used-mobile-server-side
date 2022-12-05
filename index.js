@@ -21,17 +21,17 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
-function verifyJWT(req, res, next){
+function verifyJWT(req, res, next) {
     const authHeader = req.headers.authorization;
-    if(!authHeader){
+    if (!authHeader) {
         return res.status(401).send('unauthorized')
     }
 
     const token = authHeader.split(' ')[1];
 
-    jwt.verify(token, process.env.ACCESS_TOKEN, function(err, decoded) {
-        if(err) {
-            return res.status(403).send({message: 'forbidden access'})
+    jwt.verify(token, process.env.ACCESS_TOKEN, function (err, decoded) {
+        if (err) {
+            return res.status(403).send({ message: 'forbidden access' })
         }
 
         req.decoded = decoded;
@@ -41,13 +41,25 @@ function verifyJWT(req, res, next){
 }
 
 
-
+// functions 
 async function run() {
     try {
         const usedMobileCollection = client.db('usedMobileResaler').collection('usedMobiles');
         const categoryCollection = client.db('usedMobileResaler').collection('mobileCategory');
         const bookingsCollection = client.db('usedMobileResaler').collection('bookings');
         const usersCollection = client.db('usedMobileResaler').collection('users');
+        const usersMobileSecondCollection = client.db('usedMobileResaler').collection('usedMobileSecondCollection');
+
+
+        const verifyAdmin = async (req, res, next) => {
+            const decodedEmail = req.decoded.email;
+            const query = { email: decodedEmail };
+            const user = await usersCollection.findOne(query);
+            if (user?.role !== 'admin') {
+                return res.status(403).send({ message: 'forbidden access' });
+            }
+            next();
+        }
 
 
         // category 
@@ -94,9 +106,9 @@ async function run() {
         })
 
         app.get('/showAllMobile/:id', async (req, res) => {
-            const id = req.params.id;
-            const query = { category_id: ObjectId(id) };
-            const allMobiles = await usedMobileCollection.find(query).toArray();
+            const id = req.params.extraId;
+            const query = { extraId: id };
+            const allMobiles = await usersMobileSecondCollection.find(query).toArray();
             res.send(allMobiles);
         });
 
@@ -113,38 +125,53 @@ async function run() {
         // jwt 
         app.get('/jwt', async (req, res) => {
             const email = req.query.email;
-            const query = {email: email};
+            const query = { email: email };
             const user = await usersCollection.findOne(query);
-            if(user) {
-                const token = jwt.sign({email}, process.env.ACCESS_TOKEN, {expiresIn: '1h'})
-                return res.send({accessToken: token})
+            if (user) {
+                const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, { expiresIn: '100h' })
+                return res.send({ accessToken: token })
             }
-            res.status(403).send({accessToken: ''});
+            res.status(403).send({ accessToken: '' });
         })
 
 
         // users 
-        app.get('/users', async (req, res) => {
+        app.get('/users', verifyJWT, verifyAdmin, async (req, res) => {
             const query = {};
             const users = await usersCollection.find(query).toArray();
             res.send(users);
-        })
-
-
-
-
-        app.post('/users', async (req, res) => {
-            const user = req.body;
-            const result = await usersCollection.insertOne(user);
-            res.send(result);
         });
 
 
 
-        app.put('/users/admin/:id', async (req, res) => {
+        app.get('/users/admin/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            res.send({ isAdmin: user?.role === 'admin' });
+        }); 
+
+
+        app.get('/users/saller/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            res.send({ isSaller: user?.role === 'saller' });
+        });
+
+        app.get('/users/user/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            res.send(user );
+        });
+
+
+        app.put('/users/admin/:id', verifyJWT, verifyAdmin, async (req, res) => {
+
             const id = req.params.id;
-            const filter = { _id: ObjectId(id)};
-            const options = { upsert: true};
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
             const updateDoc = {
                 $set: {
                     role: 'admin'
@@ -152,7 +179,24 @@ async function run() {
             }
             const result = await usersCollection.updateOne(filter, updateDoc, options);
             res.send(result);
-        })
+        });
+
+
+        app.post('/users', verifyJWT, verifyAdmin, async (req, res) => {
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);
+            res.send(result);
+        });
+
+
+        app.delete('/users/:id', verifyJWT, verifyAdmin, async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) };
+            const result = await usersCollection.deleteOne(filter);
+            res.send(result);
+        });
+
+
 
 
 
